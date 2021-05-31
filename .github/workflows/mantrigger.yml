@@ -2,7 +2,7 @@ name: Experimental manual trigger
 on:
   workflow_dispatch:
     inputs:
-      name:
+      test_param:
         description: 'Test Param'
         required: false
         default: 'Test'
@@ -14,3 +14,5 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: ./action-play
+        with:
+          TEST_PARAM: "${{ github.event.inputs.test_param }}"
