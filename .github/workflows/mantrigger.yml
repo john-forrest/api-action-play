@@ -16,3 +16,4 @@ jobs:
       - uses: ./action-play
         with:
           TEST_PARAM: "${{ github.event.inputs.test_param }}"
+          github_token: "${{ secrets.GITHUB_TOKEN }}"
