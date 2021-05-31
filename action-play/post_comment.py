@@ -12,7 +12,7 @@ issue_number = 1
 url = 'https://api.github.com/repos/{0}/issues/{1}/comments'.format(repo, str(issue_number))
 print(url)
 
-r = requests.put(
+r = requests.post(
     url,
     headers = {
         'Accept': 'application/vnd.github.v3+json',
