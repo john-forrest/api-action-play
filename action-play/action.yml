@@ -1,0 +1,13 @@
+name: "Action Play"
+description: "Run test with parameter"
+
+inputs:
+  TEST_PARAM:
+    description: "Test Param"
+    required: false
+    default: ""
+
+runs:
+  using: "docker"
+  image: "Dockerfile"
+
