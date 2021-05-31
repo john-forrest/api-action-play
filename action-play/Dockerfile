@@ -2,9 +2,9 @@ FROM debian
 
 RUN apt update -y && \
     apt upgrade -y
-RUN apt install -y python
+RUN apt install -y python3 python3-pip
 
-RUN python -m pip install requests
+RUN python3 -m pip install requests
 
 ADD entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
