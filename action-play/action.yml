@@ -6,8 +6,6 @@ inputs:
     description: "Test Param"
     required: false
     default: ""
-  github_token:
-    required: true
 
 runs:
   using: "docker"
