@@ -7,4 +7,4 @@ if [ -z "$REPO_TOKEN" ] ; then
   exit 1
 fi
 
-python3 post_comment.py
+python3 /post_comment.py
