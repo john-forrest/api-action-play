@@ -1,4 +1,4 @@
-#!/usr/bin/env bash -l
+#!/usr/bin/env -S bash -l
 
 # Post comment to Issue #1 of john-forrest/actions-test-repo
 
