@@ -1,5 +1,6 @@
 import requests
 import os
+import sys
 
 repo = 'john-forrest/actions-test-repo'
 repo_token = os.environ['REPO_TOKEN']
@@ -8,8 +9,11 @@ github_repository = os.environ['GITHUB_REPOSITORY']
 input_test_param = os.environ['INPUT_TEST_PARAM']
 issue_number = 1
 
+url = 'https://api.github.com/repos/{0}/issues/{1}/comments'.format(repo, str(issue_number))
+print(url)
+
 r = requests.put(
-    'https://api.github.com/repos/{0}/issues/{1}/comments'.format(repo, str(issue_number)),
+    url,
     headers = {
         'Accept': 'application/vnd.github.v3+json',
         'Authorization': 'Bearer {0}'.format(repo_token)
@@ -21,4 +25,4 @@ r = requests.put(
 print(r.json())
 print(r.status_code)
 if r.status_code != 200:
-    os.exit(-1)
+    sys.exit(-1)
