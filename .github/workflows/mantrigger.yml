@@ -1,0 +1,16 @@
+name: Experimental manual trigger
+on:
+  workflow_dispatch:
+    inputs:
+      name:
+        description: 'Test Param'
+        required: false
+        default: 'Test'
+
+jobs:
+  play_action:
+    name "Play Action"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: ./action-play
