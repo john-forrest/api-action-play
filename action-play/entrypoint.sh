@@ -6,4 +6,4 @@ target_repo=john-forrest/actions-test-repo
 issue_number=1
 curl -s -X POST https://api.github.com/repos/${target_repo}/issues/$issue_number/comments \
             -d '{"body":"Posted by $GITHUB_ACTOR from $GITHUB_REPOSITORY ($INPUT_TEST_PARAM)"}' \
-            -H "Authorization: Bearer $INPUT_github_token"
+            -H "Authorization: Bearer $INPUT_GITHUB_TOKEN"
