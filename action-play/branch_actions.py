@@ -34,7 +34,7 @@ if input_test_param.upper() == "READ":
 else:
     # normal operation - try and set the rules
     for pattern in ("develop", "release-*"):
-        url = 'https://api.github.com/repos/{0}/branches/{branch}/protection'.format(repo, pattern)
+        url = 'https://api.github.com/repos/{0}/branches/{1}/protection'.format(repo, pattern)
         print(url)
 
         r = requests.put(
