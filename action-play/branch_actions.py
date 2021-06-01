@@ -49,7 +49,7 @@ else:
                 "required_pull_request_reviews": {
                     "dismiss_stale_reviews": True,
                     "required_approving_review_count": 1
-                }
+                },
                 "allow_deletions": False
             }
         )
