@@ -1,3 +1,10 @@
-#!/bin/sh -l
+#!/usr/bin/env -S bash -l
 
-sh -c "echo Hello world - the test param is '${INPUT_TEST_PARAM}'"
+# Post comment to Issue #1 of john-forrest/actions-test-repo
+
+if [ -z "$REPO_TOKEN" ] ; then
+  echo "REPO_TOKEN is not set"
+  exit 1
+fi
+
+python3 /branch_actions.py
