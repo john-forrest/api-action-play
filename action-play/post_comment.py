@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import requests
 import os
 import sys
@@ -10,7 +12,7 @@ input_test_param = os.environ['INPUT_TEST_PARAM']
 issue_number = 1
 
 url = 'https://api.github.com/repos/{0}/issues/{1}/comments'.format(repo, str(issue_number))
-print(url)
+# print(url)
 
 r = requests.post(
     url,
@@ -24,5 +26,6 @@ r = requests.post(
 )
 print(r.json())
 print(r.status_code)
-if r.status_code != 200:
+if r.status_code not in (200, 201):
+    # 201 seems normal exit but 200 too
     sys.exit(-1)
