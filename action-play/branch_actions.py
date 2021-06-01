@@ -51,6 +51,7 @@ else:
                 },
                 "allow_deletions": False,
                 "restrictions": {
+                    "apps": []
                 },
                 "required_status_checks": {
                     "strict": False,
