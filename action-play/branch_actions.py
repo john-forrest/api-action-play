@@ -49,7 +49,8 @@ else:
                     "dismiss_stale_reviews": True,
                     "required_approving_review_count": 1
                 },
-                "allow_deletions": False
+                "allow_deletions": False,
+                "restrictions": None # real content only valid for organisations
             }
         )
         print(r.json())
