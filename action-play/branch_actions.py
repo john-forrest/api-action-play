@@ -53,6 +53,10 @@ else:
                 "restrictions": {
                     "users": ["john-forrest"],
                     "teams": []
+                },
+                "required_status_checks": {
+                    "strict": False,
+                    "contexts": []
                 }
             }
         )
