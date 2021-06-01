@@ -14,7 +14,7 @@ github_actor = os.environ['GITHUB_ACTOR']
 github_repository = os.environ['GITHUB_REPOSITORY']
 input_test_param = os.environ['INPUT_TEST_PARAM']
 
-if input_test_param = "READ":
+if input_test_param == "READ":
     # as a test, read all the branches and then read the entries for the designed patterns
     url = 'https://api.github.com/repos/{0}/branches'.format(repo)
     print(url)
