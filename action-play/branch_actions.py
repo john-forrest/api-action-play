@@ -7,6 +7,7 @@
 import requests
 import os
 import sys
+import re
 
 repo = 'john-forrest/actions-test-repo'
 repo_token = os.environ['REPO_TOKEN']
@@ -14,7 +15,7 @@ github_actor = os.environ['GITHUB_ACTOR']
 github_repository = os.environ['GITHUB_REPOSITORY']
 input_test_param = os.environ['INPUT_TEST_PARAM']
 
-if input_test_param.upper() == "READ":
+if input_test_param and input_test_param.upper() == "READ":
     # as a test, read all the branches and then read the entries for the designed patterns
     url = 'https://api.github.com/repos/{0}/branches'.format(repo)
     print(url)
@@ -31,10 +32,54 @@ if input_test_param.upper() == "READ":
     if r.status_code not in (200,):
             sys.exit(-1)
 
+    branch_info = r.json()
+
+    for b_info in branch_info:
+        # for each branch, get the protection info
+        branch_name = b_info["name"]
+        print(branch_name)
+        protected = b_info["protected"]
+        if not protected:
+            continue
+        url = 'https://api.github.com/repos/{0}/branches/{1}/protection'.format(repo, branch_name)
+        r = requests.get(
+            url,
+            headers = {
+                'Accept': 'application/vnd.github.v3+json',
+                'Authorization': 'Bearer {0}'.format(repo_token)
+            }
+        )
+        print(r.status_code)
+        print(r.json())
+        if r.status_code not in (200,):
+            sys.exit(-1)
+
 else:
-    # normal operation - try and set the rules
-    for pattern in ("develop", "release-*"):
-        url = 'https://api.github.com/repos/{0}/branches/{1}/protection'.format(repo, pattern)
+    # normal operation - try and set the rules. Need to search for branches first so we know which
+    # ones exist
+
+    url = 'https://api.github.com/repos/{0}/branches'.format(repo)
+    print(url)
+
+    r = requests.get(
+        url,
+        headers = {
+            'Accept': 'application/vnd.github.v3+json',
+            'Authorization': 'Bearer {0}'.format(repo_token)
+        }
+    )
+    print(r.status_code)
+    print(r.json())
+    if r.status_code not in (200,):
+            sys.exit(-1)
+
+    match_trunk_name = re.compile(r"^(develop|release-.*)$")
+    branch_info = r.json()
+    branch_names = (b_info["name"] for b_info in branch_info)
+    trunk_names = [branch_name for branch_name in branch_names if match_trunk_name.match(branch_name)]
+
+    for branch in trunk_names:
+        url = 'https://api.github.com/repos/{0}/branches/{1}/protection'.format(repo, branch)
         print(url)
 
         r = requests.put(
@@ -47,12 +92,15 @@ else:
                 "enforce_admins": True,
                 "required_pull_request_reviews": {
                     "dismiss_stale_reviews": True,
-                    "required_approving_review_count": 1
+                    "required_approving_review_count": 1,
+                    "require_code_owner_reviews": False
                 },
                 "allow_deletions": False,
-                "restrictions": {
-                    "apps": []
-                },
+#                "restrictions": {
+#                    "users": [],
+#                    "teams": []
+#                },
+                "restrictions": None,
                 "required_status_checks": {
                     "strict": False,
                     "contexts": []
