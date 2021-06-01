@@ -28,8 +28,7 @@ if input_test_param == "READ":
     )
     print(r.status_code)
     print(r.json())
-    if r.status_code not in (200):
-            # 201 seems normal exit but 200 too
+    if r.status_code not in (200,):
             sys.exit(-1)
 
 else:
