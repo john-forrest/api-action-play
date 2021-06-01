@@ -50,7 +50,10 @@ else:
                     "required_approving_review_count": 1
                 },
                 "allow_deletions": False,
-                "restrictions": None # real content only valid for organisations
+                "restrictions": {
+                    "users": ["john-forrest"]
+                    "teams": []
+                }
             }
         )
         print(r.json())
