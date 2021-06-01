@@ -51,7 +51,7 @@ else:
                 },
                 "allow_deletions": False,
                 "restrictions": {
-                    "users": ["john-forrest"],
+                    "users": [],
                     "teams": []
                 },
                 "required_status_checks": {
