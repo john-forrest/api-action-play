@@ -51,8 +51,6 @@ else:
                 },
                 "allow_deletions": False,
                 "restrictions": {
-                    "users": [],
-                    "teams": []
                 },
                 "required_status_checks": {
                     "strict": False,
