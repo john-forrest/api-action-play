@@ -8,6 +8,6 @@ RUN python3 -m pip install requests
 
 ADD entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
-ADD post_comment.py /post_comment.py
-RUN chmod +xr /post_comment.py
+ADD branch_actions.py /branch_actions.py
+RUN chmod +xr /branch_actions.py
 ENTRYPOINT ["/entrypoint.sh"]
