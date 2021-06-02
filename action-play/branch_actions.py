@@ -31,8 +31,7 @@ payload = {
   # GitHub App's identifier
   'iss': app_id
 }
-actual_jwt = jwt.encode(payload, app_key, algorithm='RS256')
-repo_token = actual_jwt.decode()
+repo_token = jwt.encode(payload, app_key, algorithm='RS256')
 
 if input_test_param and input_test_param.upper() == "READ":
     # as a test, read all the branches and then read the entries for the designed patterns
