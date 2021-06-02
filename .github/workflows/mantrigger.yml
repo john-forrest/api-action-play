@@ -16,3 +16,5 @@ jobs:
       - uses: ./action-play
         with:
           TEST_PARAM: "${{ github.event.inputs.test_param }}"
+        env:
+          APP_KEY: "${{ secrets.APP_KEY }}"
