@@ -3,17 +3,36 @@
 # Main API reference https://docs.github.com/en/rest/reference/repos#update-branch-protection
 # Also https://stackoverflow.com/questions/51020398/github-api-enable-push-restrictions-for-branch
 # but that might be slightly old.
+# See https://gist.github.com/pelson/47c0c89a3522ed8da5cc305afc2562b0 for github app access gists
 
 import requests
+import jwt
 import os
 import sys
 import re
+import time
 
 repo = 'john-forrest/actions-test-repo'
-repo_token = os.environ['REPO_TOKEN']
+app_key = os.environ['APP_KEY']
 github_actor = os.environ['GITHUB_ACTOR']
 github_repository = os.environ['GITHUB_REPOSITORY']
 input_test_param = os.environ['INPUT_TEST_PARAM']
+
+app_id = 118400 # hardwire for the moment
+
+# Whatever we do, get repo_token from the app so we can access the test repo
+
+time_since_epoch_in_seconds = int(time.time())
+payload = {
+  # issued at time
+  'iat': time_since_epoch_in_seconds,
+  # JWT expiration time (10 minute maximum)
+  'exp': time_since_epoch_in_seconds + (10 * 60),
+  # GitHub App's identifier
+  'iss': app_id
+}
+actual_jwt = jwt.encode(payload, app_key, algorithm='RS256')
+repo_token = actual_jwt.decode()
 
 if input_test_param and input_test_param.upper() == "READ":
     # as a test, read all the branches and then read the entries for the designed patterns

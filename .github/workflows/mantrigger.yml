@@ -17,4 +17,4 @@ jobs:
         with:
           TEST_PARAM: "${{ github.event.inputs.test_param }}"
         env:
-          REPO_TOKEN: "${{ secrets.REPO_ACCESS_TOKEN }}"
+          APP_KEY: "${{ secrets.APP_KEY }}"

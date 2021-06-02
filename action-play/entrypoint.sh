@@ -2,8 +2,8 @@
 
 # Post comment to Issue #1 of john-forrest/actions-test-repo
 
-if [ -z "$REPO_TOKEN" ] ; then
-  echo "REPO_TOKEN is not set"
+if [ -z "$APP_KEY" ] ; then
+  echo "APP_KEY is not set"
   exit 1
 fi
 

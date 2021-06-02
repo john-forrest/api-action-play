@@ -4,7 +4,7 @@ RUN apt update -y && \
     apt upgrade -y
 RUN apt install -y python3 python3-pip
 
-RUN python3 -m pip install requests
+RUN python3 -m pip install requests pyjwt
 
 ADD entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
